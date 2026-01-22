@@ -9,12 +9,28 @@ struct ContentView: View {
         VStack {
             Text(lround(sliderValue).formatted())
                 .font(.largeTitle)
+            UserNameView(name: userName)
             ColorSliderView(sliderValue: $sliderValue)
             TextField("Enter your name", text: $userName)
                 .textFieldStyle(.roundedBorder)
             Spacer()
         }
         .padding()
+    }
+}
+
+struct UserNameView : View {
+    let name: String
+    
+    var body: some View {
+        HStack {
+            HStack(alignment: .firstTextBaseline) {
+                Text("USER NAME: ")
+                Text(name)
+                    .font(.largeTitle)
+            }
+            Spacer()
+        }
     }
 }
 
