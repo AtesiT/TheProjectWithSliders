@@ -14,11 +14,15 @@ struct ContentView: View {
             UserNameView(name: displayedName)
             ColorSliderView(sliderValue: $sliderValue)
             TextField("Enter your name", text: $userName)
-                .textFieldStyle(.roundedBorder)
+                .bordered()
             Button("Done", action: checkUserName)
                 .alert("Wrong format", isPresented: $isPresented, actions: {}) {
                     Text("Enter your name")
                 }
+            Text("Welcome to SwiftUI!")
+                .font(.system(size: 60))
+                .bold()
+                .foregroundStyle(.red)
 
             Spacer()
         }
@@ -62,6 +66,25 @@ struct ColorSliderView : View {
             Slider(value: $sliderValue, in: 0...255, step: 1)
             Text("255").foregroundStyle(.red)
         }
+    }
+}
+
+struct BorderedViewModifier: ViewModifier {
+    func body(content: Content ) -> some View {
+        content
+            .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+            .overlay(RoundedRectangle(cornerRadius: 4)
+                .stroke(lineWidth: 2)
+                .foregroundStyle(.blue)
+            )
+            .shadow(color: .gray.opacity(0.4), radius: 3, x: 1, y: 2)
+
+    }
+}
+
+extension TextField {
+    func bordered() -> some View {
+        modifier(BorderedViewModifier())
     }
 }
 
