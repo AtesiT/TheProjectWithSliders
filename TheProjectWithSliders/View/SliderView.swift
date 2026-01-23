@@ -4,7 +4,7 @@ struct SliderView: View {
     let color: Color
     
     
-    @State var sliderValue = Double.random(in: 0...255).rounded()
+    @Binding var sliderValue: Double
     
     var body: some View {
         
@@ -14,7 +14,7 @@ struct SliderView: View {
                 .frame(width: 50)
             Slider(value: $sliderValue, in: 0...255, step: 1)
                 .tint(color)
-            TextField("Num", value: $sliderValue, format: .number)
+            TextField("", value: $sliderValue, format: .number)
                 .frame(width: 50)
                 .textFieldStyle(.roundedBorder)
                 .keyboardType(.decimalPad)
@@ -24,5 +24,5 @@ struct SliderView: View {
 }
 
 #Preview {
-    SliderView(color: .red)
+//    SliderView(color: .red, sliderValue: $)
 }

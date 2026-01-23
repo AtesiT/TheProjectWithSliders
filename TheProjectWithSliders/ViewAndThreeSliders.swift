@@ -1,17 +1,24 @@
 import SwiftUI
 
 struct ViewAndThreeSliders: View {
+    
+    @State var redValue = Double.random(in: 0...255).rounded()
+    @State var greenValue = Double.random(in: 0...255).rounded()
+    @State var blueValue = Double.random(in: 0...255).rounded()
+    var colorView: Color { Color(red: redValue/255, green: greenValue/255, blue: blueValue/255) }
+    
+    
     var body: some View {
         ZStack {
             Color(red: 55/255, green: 150/255, blue: 255/255)
                 .ignoresSafeArea()
             VStack {
-                ColorView(width: 365, height: 135, color: .red, cornerRadius: 25)
+                ColorView(width: 365, height: 135, color: colorView, cornerRadius: 25)
                     .padding(EdgeInsets(top: 10, leading: 0, bottom: 50, trailing: 0))
                 VStack {
-                    SliderView(color: .red)
-                    SliderView(color: .green)
-                    SliderView(color: .blue)
+                    SliderView(color: .red, sliderValue: $redValue)
+                    SliderView(color: .green, sliderValue: $greenValue)
+                    SliderView(color: .blue, sliderValue: $blueValue)
                 }
                 Spacer()
             }

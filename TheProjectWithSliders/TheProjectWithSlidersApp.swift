@@ -4,7 +4,7 @@ import SwiftUI
 struct TheProjectWithSlidersApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ViewAndThreeSliders()
         }
     }
 }
