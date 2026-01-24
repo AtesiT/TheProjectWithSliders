@@ -5,6 +5,7 @@ struct SliderView: View {
     
     @Binding var sliderValue: Double
     @State private var text = ""
+    @State private var showAlert = false
     
     var body: some View {
         
@@ -19,6 +20,9 @@ struct SliderView: View {
                     text = newValue.formatted()
                 }
             TextFieldView(text: $text, action: checkValue)
+                .alert("Wrong format", isPresented: $showAlert, actions: {}) {
+                    Text("Please enter a value from 0 to 255")
+                }
         }
         .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
         .onAppear {
@@ -30,7 +34,9 @@ struct SliderView: View {
         if let sliderValue = Double(text), (0...255).contains(sliderValue) {
             self.sliderValue = sliderValue
         } else {
-            return
+            showAlert.toggle()
+            sliderValue = 0
+            text = "0"
         }
     }
 }
