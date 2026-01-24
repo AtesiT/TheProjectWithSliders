@@ -3,7 +3,7 @@ import SwiftUI
 struct SliderView: View {
     let color: Color
     
-    @Binding private var sliderValue: Double
+    @Binding var sliderValue: Double
     @State private var text = ""
     
     var body: some View {
@@ -15,19 +15,15 @@ struct SliderView: View {
             
             Slider(value: $sliderValue, in: 0...255, step: 1)
                 .tint(color)
-//                .onChange(of: sliderValue) { _, newValue in
-//                    text = newValue.formatted()
-//                }
-            
-            TextField("", value: $sliderValue, format: .number)
-                .frame(width: 50)
-                .textFieldStyle(.roundedBorder)
-                .keyboardType(.decimalPad)
+                .onChange(of: sliderValue) { _, newValue in
+                    text = newValue.formatted()
+                }
+            TextFieldView(text: $text, action: checkValue)
         }
         .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
-//        .onAppear {
-//            text = sliderValue.formatted()
-//        }
+        .onAppear {
+            text = sliderValue.formatted()
+        }
     }
     
     private func checkValue() {
