@@ -12,8 +12,6 @@ struct ViewAndThreeSliders: View {
     
     var body: some View {
         ZStack {
-            Color(red: 55/255, green: 150/255, blue: 255/255)
-                .ignoresSafeArea()
             VStack {
                 ColorView(width: 365, height: 135, color: colorView, cornerRadius: 25)
                     .frame(height: 200)
@@ -34,6 +32,10 @@ struct ViewAndThreeSliders: View {
                 }
                 Spacer()
             }
+        }
+        .background(Color(red: 55/255, green: 150/255, blue: 255/255))
+        .onTapGesture {
+            isInputActive = false
         }
     }
 }
