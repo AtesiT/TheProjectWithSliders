@@ -1,15 +1,28 @@
 import SwiftUI
 
 struct CubeIcon: View {
-    let size: CGFloat
     
     var body: some View {
         Image(systemName: "cube")
             .resizable()
-            .frame(width: size, height: size)
+            .fastSettingView()
+    }
+}
+
+struct CubeViewModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .foregroundStyle(.orange)
+            .frame(width: 64, height: 64)
+    }
+}
+
+extension View {
+    func fastSettingView() -> some View {
+        modifier(CubeViewModifier())
     }
 }
 
 #Preview {
-    CubeIcon(size: 64)
+    CubeIcon()
 }
