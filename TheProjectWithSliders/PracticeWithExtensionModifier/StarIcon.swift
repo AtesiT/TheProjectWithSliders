@@ -4,7 +4,21 @@ struct StarIcon: View {
     var body: some View {
         Image(systemName: "star.fill")
             .font(.system(size: 20))
-            .foregroundColor(.yellow)
+            .initWithStarIconViewModifier()
+    }
+}
+
+struct StarIconViewModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding()
+            .foregroundStyle(.cyan)
+    }
+}
+
+extension View {
+    func initWithStarIconViewModifier() -> some View {
+        modifier(StarIconViewModifier())
     }
 }
 
