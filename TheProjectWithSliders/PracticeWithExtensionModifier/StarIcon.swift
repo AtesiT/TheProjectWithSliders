@@ -3,6 +3,7 @@ import SwiftUI
 struct StarIcon: View {
     var body: some View {
         Image(systemName: "star.fill")
+            .resizable()
             .font(.system(size: 20))
             .initWithStarIconViewModifier()
     }
