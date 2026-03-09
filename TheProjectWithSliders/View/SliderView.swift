@@ -21,10 +21,15 @@ struct SliderView: View {
                 }
             UITextFieldRepresentation(text: $text)
                 .frame(width: 60, height: 36)
-//            TextFieldView(text: $text, action: checkValue)
-//                .alert("Wrong format", isPresented: $showAlert, actions: {}) {
-//                    Text("Please enter a value from 0 to 255")
-//                }
+                //  onChange вызывается в момент изменения данных в элементе интерфейса (в нашем случае, по нажатию на кнопку: Done
+                .onChange(of: text) { _, newValue in
+                    withAnimation {
+                        check(newValue)
+                    }
+                }
+                .alert("Wrong format", isPresented: $showAlert, actions: {}) {
+                    Text("Please enter a value from 0 to 255")
+                }
         }
         .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
         .onAppear {
@@ -32,14 +37,15 @@ struct SliderView: View {
         }
     }
     
-    private func checkValue() {
+    private func check(_ textValue: String) {
         if let sliderValue = Double(text), (0...255).contains(sliderValue) {
             self.sliderValue = sliderValue
-        } else {
-            showAlert.toggle()
-            sliderValue = 0
-            text = "0"
+            return
         }
+        
+        showAlert.toggle()
+        sliderValue = 0
+        text = "0"
     }
 }
 
