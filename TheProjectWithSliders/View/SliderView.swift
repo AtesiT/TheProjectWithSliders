@@ -19,10 +19,12 @@ struct SliderView: View {
                 .onChange(of: sliderValue) { _, newValue in
                     text = newValue.formatted()
                 }
-            TextFieldView(text: $text, action: checkValue)
-                .alert("Wrong format", isPresented: $showAlert, actions: {}) {
-                    Text("Please enter a value from 0 to 255")
-                }
+            UITextFieldRepresentation(text: $text)
+                .frame(width: 60, height: 36)
+//            TextFieldView(text: $text, action: checkValue)
+//                .alert("Wrong format", isPresented: $showAlert, actions: {}) {
+//                    Text("Please enter a value from 0 to 255")
+//                }
         }
         .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
         .onAppear {
